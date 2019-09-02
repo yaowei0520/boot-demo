@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>boot</artifactId>
+    <groupId>com.yw.boot</groupId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>boot-web</artifactId>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.yw.boot</groupId>
+      <artifactId>boot-facade</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.yw.boot</groupId>
+      <artifactId>boot-biz</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.yw.boot</groupId>
+      <artifactId>boot-common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.yw.boot</groupId>
+      <artifactId>boot-service</artifactId>
+    </dependency>
+  </dependencies>
+
+</project>

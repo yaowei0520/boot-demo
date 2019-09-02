@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yw.dao.ProductInfoDao" >
+  <resultMap id="BaseResultMap" type="com.yw.model.ProductInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="second_level_key" property="secondLevelKey" jdbcType="VARCHAR" />
+    <result column="product_key" property="productKey" jdbcType="VARCHAR" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="detail" property="detail" jdbcType="LONGVARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, second_level_key, product_key, product_name, detail, update_time, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from product_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from product_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yw.model.ProductInfo" >
+    insert into product_info (id, second_level_key, product_key, 
+      product_name, detail)
+    values (#{id,jdbcType=INTEGER}, #{secondLevelKey,jdbcType=VARCHAR}, #{productKey,jdbcType=VARCHAR}, 
+      #{productName,jdbcType=VARCHAR}, #{detail,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yw.model.ProductInfo" >
+    insert into product_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="secondLevelKey != null" >
+        second_level_key,
+      </if>
+      <if test="productKey != null" >
+        product_key,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="detail != null" >
+        detail,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="secondLevelKey != null" >
+        #{secondLevelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="productKey != null" >
+        #{productKey,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yw.model.ProductInfo" >
+    update product_info
+    <set >
+      <if test="secondLevelKey != null" >
+        second_level_key = #{secondLevelKey,jdbcType=VARCHAR},
+      </if>
+      <if test="productKey != null" >
+        product_key = #{productKey,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        detail = #{detail,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yw.model.ProductInfo" >
+    update product_info
+    set second_level_key = #{secondLevelKey,jdbcType=VARCHAR},
+      product_key = #{productKey,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yw.model.ProductInfo" >
+    update product_info
+    set second_level_key = #{secondLevelKey,jdbcType=VARCHAR},
+      product_key = #{productKey,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="queryList" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List"/> FROM product_info
+    WHERE 1=1
+    <if test="productName != null and productName != ''">
+        AND product_name LIKE #{productName,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="queryListCount" resultType="java.lang.Integer" parameterType="java.util.Map">
+    SELECT count(1) FROM product_info
+    WHERE 1=1
+    <if test="productName != null and productName != ''">
+      AND product_name LIKE #{productName,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <select id="queryProductInfoById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    SELECT <include refid="Base_Column_List"/> FROM product_info WHERE id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="queryProductInfoByName" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT count(1) FROM product_info WHERE product_name = #{productName,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

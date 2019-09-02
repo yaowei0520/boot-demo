@@ -1,0 +1,52 @@
+<!doctype html>
+<html  class="x-admin-sm" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>后台登录-X-admin2.2</title>
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="static/css/font.css">
+    <link rel="stylesheet" href="static/css/xadmin.css">
+    <link rel="stylesheet" href="static/css/login.css">
+    <link rel="stylesheet" href="static/css/theme10.min.css">
+    <script charset="utf-8" src="static/lib/layui/layui.js" ></script>
+    <script type="text/javascript" src="static/js/jquery.min.js"></script>
+</head>
+<body class="login-bg">
+    
+    <div class="login layui-anim layui-anim-up">
+        <div class="message">管理登录</div>
+        <div id="darkbannerwrap"></div>
+        
+        <form method="post" class="layui-form" >
+            <input name="userName" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <hr class="hr15">
+            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <hr class="hr15">
+            <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+            <hr class="hr20" >
+        </form>
+    </div>
+
+    <script>
+        $(function() {
+            layui.use('form', function(){
+              var form = layui.form;
+              form.on('submit(login)', function(data){
+                  var field = data.field;
+                  $.post("logining", { field: JSON.stringify(field) }, function (data) {
+                      if (data.code == '0000') {
+                        location.href='toPage?url=index.html';
+                      } else {
+                          layer.alert(data.msg, {icon: 6});
+                      }
+                  });
+                return false;
+              });
+            });
+        })
+    </script>
+    <!-- 底部结束 -->
+</body>
+</html>
